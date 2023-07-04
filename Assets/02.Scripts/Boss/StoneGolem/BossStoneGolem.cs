@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +24,18 @@ public class BossStoneGolem : BaseBoss, IListener {
         Die
     }
 
+    public CooldownTimer MoveCooldownTimer => _moveCooldownTimer;
+    public StoneGolemAttackACondition AttackACondition => _attackACondition;
+    public StoneGolemAttackBCondition AttackBCondition => _attackBCondition;
+    public StoneGolemAttackCCondition AttackCCondition => _attackCCondition;
+
+
+    protected CooldownTimer _moveCooldownTimer;
+    protected StoneGolemAttackACondition _attackACondition;
+    protected StoneGolemAttackBCondition _attackBCondition;
+    protected StoneGolemAttackCCondition _attackCCondition;
+
+
     protected StateType _curState;
     protected StateType _nextState;
 
@@ -34,9 +48,23 @@ public class BossStoneGolem : BaseBoss, IListener {
         EventManager.Instance.AddListener(BossStoneGolemEventType.Gigantic, this);
         EventManager.Instance.AddListener(BossStoneGolemEventType.DanDanMukZic, this);
         EventManager.Instance.AddListener(BossStoneGolemEventType.Die, this);
+
+        _moveCooldownTimer = new CooldownTimer(4f);
+
+        _attackACondition = new StoneGolemAttackACondition(this, 3f);
+        _attackBCondition = new StoneGolemAttackBCondition(this, 8f);
+        _attackCCondition = new StoneGolemAttackCCondition(this, 13f);
     }
 
     private void Update() {
+        if (_curState == StateType.Idle) {
+            _moveCooldownTimer?.UpdateTimer();
+        }
+
+        _attackACondition?.UpdateTimer();
+        _attackBCondition?.UpdateTimer();
+        _attackCCondition?.UpdateTimer();
+
         if (_curState != _nextState) {
             _curState = _nextState;
 
@@ -49,12 +77,21 @@ public class BossStoneGolem : BaseBoss, IListener {
                     break;
                 case StateType.AttackA:
                     _fsm.ChangeState(new StoneGolemAttackAState(this));
+                    _attackACondition.StartCooldown();
+                    _attackBCondition.Delay();
+                    _attackCCondition.Delay();
                     break;
                 case StateType.AttackB:
                     _fsm.ChangeState(new StoneGolemAttackBState(this));
+                    _attackACondition.Delay();
+                    _attackBCondition.StartCooldown();
+                    _attackCCondition.Delay();
                     break;
                 case StateType.AttackC:
                     _fsm.ChangeState(new StoneGolemAttackCState(this));
+                    _attackACondition.Delay();
+                    _attackBCondition.Delay();
+                    _attackCCondition.StartCooldown();
                     break;
                 case StateType.Heal:
                     _fsm.ChangeState(new StoneGolemHealState(this));
@@ -68,8 +105,10 @@ public class BossStoneGolem : BaseBoss, IListener {
         _fsm?.UpdateState();
     }
 
-    private void LateUpdate() => CheckTransitionToNextFhase();
-
+    private void LateUpdate() {
+        FindClosestPlayer();
+        CheckTransitionToNextFhase();
+    }
     public void SetNextState(StateType state) {
         _nextState = state;
     }
