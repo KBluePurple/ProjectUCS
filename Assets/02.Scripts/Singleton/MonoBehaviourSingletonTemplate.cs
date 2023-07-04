@@ -1,32 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MonoBehaviourSingletonTemplate<T> : MonoBehaviour where T : MonoBehaviour {
-    public static T Instance {
-        get {
-            if (_instance == null) {
-                _instance = (T)FindObjectOfType(typeof(T));
+public class MonoBehaviourSingletonTemplate<T> : MonoBehaviour where T : MonoBehaviour
+{
+    private static T _instance;
 
-                if (_instance == null) {
-                    var obj = new GameObject(typeof(T).Name);
-                    _instance = obj.AddComponent<T>();
-                }
+    public static T Instance
+    {
+        get
+        {
+            if (_instance != null) return _instance;
+            
+            _instance = (T)FindObjectOfType(typeof(T));
 
-                DontDestroyOnLoad(_instance.gameObject);
+            if (_instance == null)
+            {
+                var obj = new GameObject(typeof(T).Name);
+                _instance = obj.AddComponent<T>();
             }
+
+            DontDestroyOnLoad(_instance.gameObject);
 
             return _instance;
         }
     }
 
-    private static T _instance = null;
-
-    private void Awake() {
-        if (_instance != null) {
-            if (_instance != this) {
-                Destroy(gameObject);
-            }
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            if (_instance != this) Destroy(gameObject);
 
             return;
         }
