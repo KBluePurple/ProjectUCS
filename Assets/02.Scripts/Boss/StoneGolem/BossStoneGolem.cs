@@ -30,6 +30,7 @@ public class BossStoneGolem : BaseBoss, IListener {
     public StoneGolemAttackCCondition AttackCCondition => _attackCCondition;
 
     public StoneGolemAttackA StoneGolemAttackA => _stoneGolemAttackA;
+    public StoneGolemAttackB StoneGolemAttackB => _stoneGolemAttackB;
 
 
     protected CooldownTimer _moveCooldownTimer;
@@ -42,6 +43,7 @@ public class BossStoneGolem : BaseBoss, IListener {
     protected StateType _nextState;
 
     protected StoneGolemAttackA _stoneGolemAttackA;
+    protected StoneGolemAttackB _stoneGolemAttackB;
 
 
     private void Start() {
@@ -57,6 +59,9 @@ public class BossStoneGolem : BaseBoss, IListener {
 
         _stoneGolemAttackA = GetComponentInChildren<StoneGolemAttackA>();
         _stoneGolemAttackA.Init(this);
+
+        _stoneGolemAttackB = GetComponentInChildren<StoneGolemAttackB>();
+        StoneGolemAttackB.Init(this);
 
         EventManager.Instance.AddListener(BossStoneGolemEventType.Gigantic, this);
         EventManager.Instance.AddListener(BossStoneGolemEventType.DanDanMukZic, this);

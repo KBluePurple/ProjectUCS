@@ -17,6 +17,7 @@ public class StoneGolemAttackA : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        // Player로 수정 필요
         Test player = other.GetComponent<Test>();
         if (player != null) {
             _playerList.Add(player);

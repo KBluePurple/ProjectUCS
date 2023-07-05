@@ -16,7 +16,7 @@ public abstract class BaseBoss : Entity {
 
     protected int _phaseIndex;
     protected float _movementSpeed;
-
+    Vector2 _curDirection = Vector2.zero;
 
 
     protected Animator _animator;
@@ -30,7 +30,7 @@ public abstract class BaseBoss : Entity {
         _playerList = new List<Entity>(playerComponents);
 
         // ∫∏Ω∫ Ω∫≈»
-        _bossStats = new BossStats(5000, 10000, 500, 200, 300, 0);
+        _bossStats = new BossStats(5000, 10000, 500, 200, 3, 0);
 
 
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -41,7 +41,12 @@ public abstract class BaseBoss : Entity {
     }
 
     public void Move(Vector2 direction) {
-        _rigidbody.velocity = direction * _movementSpeed;
+        if (_curDirection != direction) {
+            _curDirection = direction;
+            _rigidbody.velocity = _curDirection * _movementSpeed;
+            float x = _curDirection.x != 0 ? _curDirection.x : transform.localScale.x;
+            transform.localScale = new Vector3(x, 1, 1);
+        }
     }
 
     public Entity FindClosestPlayer() {

@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CooldownTimer {
+
     protected float _cooldownDuration;
     protected float _timer;
+
+    private bool _isCooldownStarted;
+
 
     public CooldownTimer(float cooldownDuration) {
         _cooldownDuration = cooldownDuration;

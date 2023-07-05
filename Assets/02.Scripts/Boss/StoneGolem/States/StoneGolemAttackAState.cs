@@ -49,8 +49,4 @@ public class StoneGolemAttackAState : AttackState {
     }
 
     public override void OnStateExit() { }
-
-    IEnumerator Attack() {
-        yield return null;
-    }
 }

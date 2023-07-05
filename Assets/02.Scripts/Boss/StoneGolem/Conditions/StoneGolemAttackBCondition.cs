@@ -11,9 +11,17 @@ public class StoneGolemAttackBCondition : CooldownTimer, ICondition {
 
     public bool CanAttack() {
         if (IsCooldownReady()) {
+            // 원거리 공격
+            int randomValue = Random.Range(0, 10);
+
+            // 70%
+            if (randomValue < 7) {
+                return true;
+            }
+            StartCooldown();
             return false;
         }
-
+            
         return false;
     }
 }
