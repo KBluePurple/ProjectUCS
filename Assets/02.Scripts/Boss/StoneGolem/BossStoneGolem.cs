@@ -29,6 +29,8 @@ public class BossStoneGolem : BaseBoss, IListener {
     public StoneGolemAttackBCondition AttackBCondition => _attackBCondition;
     public StoneGolemAttackCCondition AttackCCondition => _attackCCondition;
 
+    public StoneGolemAttackA StoneGolemAttackA => _stoneGolemAttackA;
+
 
     protected CooldownTimer _moveCooldownTimer;
     protected StoneGolemAttackACondition _attackACondition;
@@ -39,21 +41,26 @@ public class BossStoneGolem : BaseBoss, IListener {
     protected StateType _curState;
     protected StateType _nextState;
 
+    protected StoneGolemAttackA _stoneGolemAttackA;
+
+
     private void Start() {
         _curState = _nextState = StateType.Idle;
         _phaseIndex = 1;
 
         _fsm = new Fsm(new StoneGolemIdleState(this));
 
-        EventManager.Instance.AddListener(BossStoneGolemEventType.Gigantic, this);
-        EventManager.Instance.AddListener(BossStoneGolemEventType.DanDanMukZic, this);
-        EventManager.Instance.AddListener(BossStoneGolemEventType.Die, this);
-
         _moveCooldownTimer = new CooldownTimer(4f);
-
         _attackACondition = new StoneGolemAttackACondition(this, 3f);
         _attackBCondition = new StoneGolemAttackBCondition(this, 8f);
         _attackCCondition = new StoneGolemAttackCCondition(this, 13f);
+
+        _stoneGolemAttackA = GetComponentInChildren<StoneGolemAttackA>();
+        _stoneGolemAttackA.Init(this);
+
+        EventManager.Instance.AddListener(BossStoneGolemEventType.Gigantic, this);
+        EventManager.Instance.AddListener(BossStoneGolemEventType.DanDanMukZic, this);
+        EventManager.Instance.AddListener(BossStoneGolemEventType.Die, this);
     }
 
     private void Update() {
@@ -109,6 +116,7 @@ public class BossStoneGolem : BaseBoss, IListener {
         FindClosestPlayer();
         CheckTransitionToNextFhase();
     }
+
     public void SetNextState(StateType state) {
         _nextState = state;
     }

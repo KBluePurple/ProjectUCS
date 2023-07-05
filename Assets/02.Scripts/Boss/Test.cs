@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Test : Entity {
 
-    public override void Die() {
+    public override void Init() {
+        base.Init();
+
+        _healthSystem.Init(this, 100);
     }
 
-    public override void Move(Vector2 direction) {
+    public override void Die() {
+        Debug.Log("Á×À½");
     }
 }

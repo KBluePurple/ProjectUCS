@@ -17,14 +17,14 @@ public class StoneGolemMoveState : MoveState {
     public override void OnStateEnter() {
         Debug.Log("Move");
 
-        _movingCooldownTimer = new CooldownTimer(2f);
+        _movingCooldownTimer = new CooldownTimer(3f);
     }
 
     public override void OnStateUpdate() {
         if (_bossStoneGolem.Target != null) {
             Vector2 direction = new Vector2((_bossStoneGolem.Target.transform.position.x - _bossStoneGolem.transform.position.x), 0);
 
-            if (Mathf.Abs(direction.x) >= 0.3f) {
+            if (Mathf.Abs(direction.x) >= 0.5f) {
                 direction.Normalize();
                 _bossStoneGolem.Move(direction);
             }
