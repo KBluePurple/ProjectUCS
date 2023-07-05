@@ -14,11 +14,20 @@ public class StoneGolemAttackAState : AttackState {
 
     public override void OnStateEnter() {
         Debug.Log("AttackA");
+
+        _bossStoneGolem.LookTarget();
+
+        _bossStoneGolem.AttackACondition.StartCooldown();
+        _bossStoneGolem.AttackCCondition.Delay();
+        _bossStoneGolem.AttackCCondition.Delay();
+
         _attackCooldownTimer = new CooldownTimer(0.4f);
         _attackCooldownTimer.StartCooldown();
 
         _idleTransitionTimer = new CooldownTimer(2f);
         _idleTransitionTimer.StartCooldown();
+
+        _bossStoneGolem.Animator.SetTrigger(BossStoneGolem.StateType.AttackA.ToString());
     }
 
     public override void OnStateUpdate() {

@@ -10,6 +10,12 @@ public class StoneGolemAttackCState : AttackState {
 
     public override void OnStateEnter() {
         Debug.Log("AttackC");
+
+        _bossStoneGolem.LookTarget();
+
+        _bossStoneGolem.AttackACondition.Delay();
+        _bossStoneGolem.AttackBCondition.Delay();
+        _bossStoneGolem.AttackCCondition.StartCooldown();
     }
     public override void OnStateUpdate() {
         // 레이저 공격 

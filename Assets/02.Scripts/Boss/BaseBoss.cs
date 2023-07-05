@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BaseBoss : Entity {
     public Entity Target => _target;
     public BossStats BossStats => _bossStats;
+    public Animator Animator => _animator;
 
     protected Entity _target;
     [SerializeField] protected List<Entity> _playerList = new List<Entity>();
@@ -15,37 +16,61 @@ public abstract class BaseBoss : Entity {
     protected Fsm _fsm;
 
     protected int _phaseIndex;
-    protected float _movementSpeed;
-    Vector2 _curDirection = Vector2.zero;
+    protected float _moveSpeed;
+    private Vector2 _curDirection = Vector2.zero;
+    private float _curX;
 
+    protected CooldownTimer _findTimer;
 
     protected Animator _animator;
 
     public override void Init() {
         base.Init();
-        _healthSystem.Init(this);
 
         // Player로 수정해야 함
         Test[] playerComponents = FindObjectsOfType<Test>();
         _playerList = new List<Entity>(playerComponents);
 
         // 보스 스탯
-        _bossStats = new BossStats(5000, 10000, 500, 200, 3, 0);
+        _bossStats = new BossStats(5000, 10000, 500, 200, 3, 0, 0);
+
+        _healthSystem.Init(this, _bossStats.Hp);
 
 
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
 
+        _moveSpeed = _bossStats.MoveSpeed;
 
-        _movementSpeed = _bossStats.MovementSpeed;
+        _findTimer = new CooldownTimer(2f);
     }
 
     public void Move(Vector2 direction) {
         if (_curDirection != direction) {
             _curDirection = direction;
-            _rigidbody.velocity = _curDirection * _movementSpeed;
-            float x = _curDirection.x != 0 ? _curDirection.x : transform.localScale.x;
-            transform.localScale = new Vector3(x, 1, 1);
+            _rigidbody.velocity = _curDirection * _moveSpeed;
+
+            if (_curDirection.x != 0)
+                Look(_curDirection.x);
+        }
+    }
+
+    public void Look(float x) {
+        if (_curX == x) {
+            return;
+        }
+
+        _curX = x;
+        transform.localScale = new Vector3(_curX, 1, 1);
+    }
+
+    public void LookTarget() {
+        if (Target != null) {
+            Vector2 direction = Target.transform.position - transform.position;
+            direction.Normalize();
+
+            if (direction.x != 0)
+                Look(direction.x);
         }
     }
 
@@ -64,5 +89,21 @@ public abstract class BaseBoss : Entity {
         _target = closestTarget;
 
         return closestTarget;
+    }
+
+    public Entity FindRandomPlayer() {
+        if (_findTimer.IsCooldownReady()) {
+            int randomIndex = Random.Range(0, _playerList.Count);
+            _target = _playerList[randomIndex];
+            _findTimer.StartCooldown();
+        }
+        else {
+            _findTimer?.UpdateTimer();
+        }
+        return _target;
+    }
+
+    public void RemovePlayerList(Entity player) {
+        _playerList.Remove(player);
     }
 }

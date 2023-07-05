@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StoneGolemAttackACondition : CooldownTimer, ICondition {
+    public float AttackRange => _attackRange;
+
     protected BossStoneGolem _bossStoneGolem;
 
     private float _attackRange = 2f;

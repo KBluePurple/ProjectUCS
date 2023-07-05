@@ -21,7 +21,9 @@ public class BossStoneGolem : BaseBoss, IListener {
         AttackB, // 원거리 공격
         AttackC, // 레이저 공격
         Heal, // 방어 태세
-        Die
+        Die,
+        Gigantic,  // 2페이즈
+        DanDanMukZic // 3페이즈
     }
 
     public CooldownTimer MoveCooldownTimer => _moveCooldownTimer;
@@ -37,7 +39,6 @@ public class BossStoneGolem : BaseBoss, IListener {
     protected StoneGolemAttackACondition _attackACondition;
     protected StoneGolemAttackBCondition _attackBCondition;
     protected StoneGolemAttackCCondition _attackCCondition;
-
 
     protected StateType _curState;
     protected StateType _nextState;
@@ -69,13 +70,15 @@ public class BossStoneGolem : BaseBoss, IListener {
     }
 
     private void Update() {
+        // Test
+        if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
+            _healthSystem.TakeDamage(1000);
+
+
         if (_curState == StateType.Idle) {
             _moveCooldownTimer?.UpdateTimer();
         }
 
-        _attackACondition?.UpdateTimer();
-        _attackBCondition?.UpdateTimer();
-        _attackCCondition?.UpdateTimer();
 
         if (_curState != _nextState) {
             _curState = _nextState;
@@ -89,27 +92,24 @@ public class BossStoneGolem : BaseBoss, IListener {
                     break;
                 case StateType.AttackA:
                     _fsm.ChangeState(new StoneGolemAttackAState(this));
-                    _attackACondition.StartCooldown();
-                    _attackBCondition.Delay();
-                    _attackCCondition.Delay();
                     break;
                 case StateType.AttackB:
                     _fsm.ChangeState(new StoneGolemAttackBState(this));
-                    _attackACondition.Delay();
-                    _attackBCondition.StartCooldown();
-                    _attackCCondition.Delay();
                     break;
                 case StateType.AttackC:
                     _fsm.ChangeState(new StoneGolemAttackCState(this));
-                    _attackACondition.Delay();
-                    _attackBCondition.Delay();
-                    _attackCCondition.StartCooldown();
                     break;
                 case StateType.Heal:
                     _fsm.ChangeState(new StoneGolemHealState(this));
                     break;
                 case StateType.Die:
                     _fsm.ChangeState(new StoneGolemDieState(this));
+                    break;
+                case StateType.Gigantic:
+                    _fsm.ChangeState(new StoneGolemGiganticState(this));
+                    break;
+                case StateType.DanDanMukZic:
+                    _fsm.ChangeState(new StoneGolemDanDanMukZicState(this));
                     break;
             }
         }
@@ -118,7 +118,8 @@ public class BossStoneGolem : BaseBoss, IListener {
     }
 
     private void LateUpdate() {
-        FindClosestPlayer();
+        // FindClosestPlayer();
+        FindRandomPlayer();
         CheckTransitionToNextFhase();
     }
 
@@ -148,16 +149,19 @@ public class BossStoneGolem : BaseBoss, IListener {
     public void OnEvent<TEventType>(TEventType eventType, Component sender, object param = null) where TEventType : Enum {
         if (eventType.Equals(BossStoneGolemEventType.Gigantic)) {
             // 거대화 
+            _nextState = StateType.Gigantic;
             return;
         }
 
         if (eventType.Equals(BossStoneGolemEventType.DanDanMukZic)) {
             // 단단묵직
+            _nextState = StateType.DanDanMukZic;
             return;
         }
 
         if (eventType.Equals(BossStoneGolemEventType.Die)) {
             // 죽음
+            _nextState = StateType.Die;
             return;
         }
     }

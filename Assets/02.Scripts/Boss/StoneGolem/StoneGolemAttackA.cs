@@ -34,6 +34,8 @@ public class StoneGolemAttackA : MonoBehaviour {
         foreach (Entity player in _playerList) {
             // 공격 
             player.HealthSystem.TakeDamage(_attackDamage);
+            // Todo: 넉백효과 필요
+
         }
 
         _playerList.Clear();
