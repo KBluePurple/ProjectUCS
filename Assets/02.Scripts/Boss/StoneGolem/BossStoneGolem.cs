@@ -80,7 +80,7 @@ public class BossStoneGolem : BaseBoss, IListener {
     private void Update() {
         // Test
         if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
-            _healthSystem.TakeDamage(1000);
+            StoneGolemHealthSystem.TakeDamage(1000);
 
 
         if (_curState == StateType.Idle) {

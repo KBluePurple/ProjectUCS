@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealthSystem {
     protected float _health;
     protected float _maxHealth;
 
-    public void Init(Entity entity, float maxHealth = 0f) {
+    public virtual void Init(Entity entity, float maxHealth = 0f) {
         _entity = entity;
         _health = _maxHealth = maxHealth;
     }
