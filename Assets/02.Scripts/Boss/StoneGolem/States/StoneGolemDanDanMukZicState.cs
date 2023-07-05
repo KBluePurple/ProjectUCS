@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemDanDanMukZicState : BaseState {
-    private BossStoneGolem _bossStoneGolem;
-
+public class StoneGolemDanDanMukZicState : StoneGolemBaseState {
     private CooldownTimer _phaseChangeTimer;
 
-    public StoneGolemDanDanMukZicState(Entity entity) : base(entity) {
-        _bossStoneGolem = entity as BossStoneGolem;
-    }
+    public StoneGolemDanDanMukZicState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
         Debug.Log("DanDanMukZic");

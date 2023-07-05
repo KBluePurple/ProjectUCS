@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class StoneGolemIdleState : IdleState {
-    private BossStoneGolem _bossStoneGolem;
-
-    public StoneGolemIdleState(Entity entity) : base(entity) {
-        _bossStoneGolem = entity as BossStoneGolem;
-    }
+public class StoneGolemIdleState : StoneGolemBaseState {
+    public StoneGolemIdleState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
         Debug.Log("Idle");
@@ -39,6 +35,12 @@ public class StoneGolemIdleState : IdleState {
         _bossStoneGolem.AttackCCondition?.UpdateTimer();
         if (_bossStoneGolem.AttackCCondition.CanAttack()) {
             _bossStoneGolem.SetNextState(BossStoneGolem.StateType.AttackC);
+            return;
+        }
+
+        _bossStoneGolem.HealCondition?.UpdateTimer();
+        if (_bossStoneGolem.HealCondition.CanSkill()) {
+            _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Heal);
             return;
         }
     }

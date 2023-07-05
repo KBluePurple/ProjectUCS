@@ -1,7 +1,5 @@
 [System.Serializable]
 public class BossStats {
-
-
     public float Hp { get; private set; }
     public float Mp { get; private set; }
     public float Def { get; private set; }

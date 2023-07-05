@@ -26,10 +26,15 @@ public class BossStoneGolem : BaseBoss, IListener {
         DanDanMukZic // 3ÆäÀÌÁî
     }
 
+    public StoneGolemHealthSystem StoneGolemHealthSystem => _healthSystem as StoneGolemHealthSystem;
+
+
     public CooldownTimer MoveCooldownTimer => _moveCooldownTimer;
     public StoneGolemAttackACondition AttackACondition => _attackACondition;
     public StoneGolemAttackBCondition AttackBCondition => _attackBCondition;
     public StoneGolemAttackCCondition AttackCCondition => _attackCCondition;
+    public StoneGolemHealCondition HealCondition => _healCondition;
+
 
     public StoneGolemAttackA StoneGolemAttackA => _stoneGolemAttackA;
     public StoneGolemAttackB StoneGolemAttackB => _stoneGolemAttackB;
@@ -39,6 +44,8 @@ public class BossStoneGolem : BaseBoss, IListener {
     protected StoneGolemAttackACondition _attackACondition;
     protected StoneGolemAttackBCondition _attackBCondition;
     protected StoneGolemAttackCCondition _attackCCondition;
+    protected StoneGolemHealCondition _healCondition;
+
 
     protected StateType _curState;
     protected StateType _nextState;
@@ -57,6 +64,7 @@ public class BossStoneGolem : BaseBoss, IListener {
         _attackACondition = new StoneGolemAttackACondition(this, 3f);
         _attackBCondition = new StoneGolemAttackBCondition(this, 8f);
         _attackCCondition = new StoneGolemAttackCCondition(this, 13f);
+        _healCondition = new StoneGolemHealCondition(this, 15f);
 
         _stoneGolemAttackA = GetComponentInChildren<StoneGolemAttackA>();
         _stoneGolemAttackA.Init(this);
@@ -128,7 +136,7 @@ public class BossStoneGolem : BaseBoss, IListener {
     }
 
     private void CheckTransitionToNextFhase() {
-        float value = _healthSystem.GetNormalizedHealth();
+        float value = StoneGolemHealthSystem.GetNormalizedHealth();
         if (_phaseIndex == 1 && value < 0.6f) {
             _phaseIndex = 2;
             EventManager.Instance.PostNotification(BossStoneGolemEventType.Gigantic, this, null);

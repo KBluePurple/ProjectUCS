@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemAttackBCondition : CooldownTimer, ICondition {
+public class StoneGolemAttackBCondition : CooldownTimer, IAttackCondition {
     protected BossStoneGolem _bossStoneGolem;
 
     public StoneGolemAttackBCondition(BossStoneGolem bossStoneGolem, float cooldownDuration) : base(cooldownDuration) {

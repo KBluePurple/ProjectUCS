@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemMoveState : MoveState {
-    private BossStoneGolem _bossStoneGolem;
-
+public class StoneGolemMoveState : StoneGolemBaseState {
     private float _distanceMoved = 0f;
     private float _moveSpeed;
 
     public StoneGolemMoveState(Entity entity) : base(entity) {
-        _bossStoneGolem = entity as BossStoneGolem;
         _moveSpeed = _bossStoneGolem.BossStats.MoveSpeed;
     }
 
@@ -54,6 +51,12 @@ public class StoneGolemMoveState : MoveState {
         _bossStoneGolem.AttackCCondition?.UpdateTimer();
         if (_bossStoneGolem.AttackCCondition.CanAttack()) {
             _bossStoneGolem.SetNextState(BossStoneGolem.StateType.AttackC);
+            return;
+        }
+
+        _bossStoneGolem.HealCondition?.UpdateTimer();
+        if (_bossStoneGolem.HealCondition.CanSkill()) {
+            _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Heal);
             return;
         }
     }

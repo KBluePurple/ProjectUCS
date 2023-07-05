@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemAttackAState : AttackState {
-    private BossStoneGolem _bossStoneGolem;
+public class StoneGolemAttackAState : StoneGolemBaseState {
     private CooldownTimer _attackCooldownTimer;
     private CooldownTimer _attackExecutionTimer;
     private CooldownTimer _idleTransitionTimer;
 
-    public StoneGolemAttackAState(Entity entity) : base(entity) {
-        _bossStoneGolem = entity as BossStoneGolem;
-    }
+    public StoneGolemAttackAState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
         Debug.Log("AttackA");

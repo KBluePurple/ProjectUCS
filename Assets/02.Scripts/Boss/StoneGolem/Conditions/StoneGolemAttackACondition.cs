@@ -2,16 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemAttackACondition : CooldownTimer, ICondition {
+public class StoneGolemAttackACondition : StoneGolemBaseCondition, IAttackCondition {
     public float AttackRange => _attackRange;
-
-    protected BossStoneGolem _bossStoneGolem;
-
     private float _attackRange = 2f;
 
-    public StoneGolemAttackACondition(BossStoneGolem bossStoneGolem, float cooldownDuration) : base(cooldownDuration) {
-        _bossStoneGolem = bossStoneGolem;
-    }
+    public StoneGolemAttackACondition(BossStoneGolem bossStoneGolem, float cooldownDuration) : base(bossStoneGolem, cooldownDuration) { }
 
     public bool CanAttack() {
         if (IsCooldownReady() && _bossStoneGolem.Target != null) {

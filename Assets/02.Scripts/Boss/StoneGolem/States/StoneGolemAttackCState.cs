@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemAttackCState : AttackState {
-    private BossStoneGolem _bossStoneGolem;
-    public StoneGolemAttackCState(Entity entity) : base(entity) {
-        _bossStoneGolem = entity as BossStoneGolem;
-    }
+public class StoneGolemAttackCState : StoneGolemBaseState {
+    public StoneGolemAttackCState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
         Debug.Log("AttackC");

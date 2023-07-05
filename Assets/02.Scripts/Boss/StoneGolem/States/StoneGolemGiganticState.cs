@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemGiganticState : BaseState {
-    private BossStoneGolem _bossStoneGolem;
-
+public class StoneGolemGiganticState : StoneGolemBaseState {
     private CooldownTimer _phaseChangeTimer;
 
-    public StoneGolemGiganticState(Entity entity) : base(entity) {
-        _bossStoneGolem = entity as BossStoneGolem;
-    }
+    public StoneGolemGiganticState(Entity entity) : base(entity) {}
 
     public override void OnStateEnter() {
         Debug.Log("Gigantic");
