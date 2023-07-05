@@ -20,8 +20,10 @@ public class StoneGolemAttackB : MonoBehaviour {
         newStoneGolemProjectile.transform.position = transform.position;
 
         // Todo: È¸Àü
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = targetRotation;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        newStoneGolemProjectile.transform.rotation = targetRotation;
+
 
         newStoneGolemProjectile.Init(5f, _attackDamage, direction);
     }
