@@ -13,7 +13,7 @@ public class StoneGolemHealState : StoneGolemBaseState {
         // TODO: 방어태세 지속시간 몇?
         // 방어태세면 다른 공격 할 수 잇는지?
         _healExecutionTimer = new CooldownTimer(5f);
-        _healExecutionTimer.UpdateTimer();
+        _healExecutionTimer.StartCooldown();
 
         _bossStoneGolem.StoneGolemHealthSystem.Heal();
     }
@@ -26,7 +26,7 @@ public class StoneGolemHealState : StoneGolemBaseState {
 
         if (_healExecutionTimer.IsCooldownReady()) {
             _bossStoneGolem.StoneGolemHealthSystem.EndHeal();
-            _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Heal);
+            _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Idle);
         }
     }
 

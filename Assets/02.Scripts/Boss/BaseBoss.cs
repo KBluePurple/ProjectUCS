@@ -18,11 +18,13 @@ public abstract class BaseBoss : Entity {
     protected int _phaseIndex;
     protected float _moveSpeed;
     private Vector2 _curDirection = Vector2.zero;
-    private float _curX;
+    private Vector2 _curScale = Vector2.one;
+    private float _curX = 1;
 
     protected CooldownTimer _findTimer;
 
     protected Animator _animator;
+
 
     public override void Init() {
         base.Init();
@@ -61,7 +63,8 @@ public abstract class BaseBoss : Entity {
         }
 
         _curX = x;
-        transform.localScale = new Vector3(_curX, 1, 1);
+        // TODO: 수정해야 함
+        transform.localScale = new Vector3(_curX * _curScale.x, _curScale.y, 1);
     }
 
     public void LookTarget() {
@@ -73,6 +76,15 @@ public abstract class BaseBoss : Entity {
                 Look(direction.x);
         }
     }
+
+    public virtual void SetScale(Vector2 scale) {
+        if (_curScale == scale)
+            return;
+
+        _curScale = scale;
+        transform.localScale = new Vector3(_curX * _curScale.x, _curScale.y, 1);
+    }
+
 
     public Entity FindClosestPlayer() {
         float closestDistance = Mathf.Infinity;
@@ -93,6 +105,12 @@ public abstract class BaseBoss : Entity {
 
     public Entity FindRandomPlayer() {
         if (_findTimer.IsCooldownReady()) {
+            //if (_playerList.Count <= 0) {
+            //    // TODO: 남은 플레이어 존재하지 않음
+            //    _target = null;
+            //    return null;
+            //}
+
             int randomIndex = Random.Range(0, _playerList.Count);
             _target = _playerList[randomIndex];
             _findTimer.StartCooldown();
@@ -100,6 +118,7 @@ public abstract class BaseBoss : Entity {
         else {
             _findTimer?.UpdateTimer();
         }
+
         return _target;
     }
 

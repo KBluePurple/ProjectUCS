@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CooldownTimer {
@@ -28,4 +26,6 @@ public class CooldownTimer {
     public void Delay(float delay = 1f) {
         _timer -= delay;
     }
+
+    public float GetNormalizedTimer() => _timer / _cooldownDuration;
 }

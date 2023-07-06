@@ -12,5 +12,10 @@ public class Test : Entity {
 
     public override void Die() {
         Debug.Log("Á×À½");
+
+        //BaseBoss boss = FindObjectOfType<BaseBoss>();
+        //if (boss != null) {
+        //    boss.RemovePlayerList(this);
+        //}
     }
 }

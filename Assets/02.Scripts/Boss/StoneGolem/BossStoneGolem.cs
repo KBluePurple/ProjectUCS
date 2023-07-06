@@ -82,11 +82,9 @@ public class BossStoneGolem : BaseBoss, IListener {
         if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
             StoneGolemHealthSystem.TakeDamage(1000);
 
-
         if (_curState == StateType.Idle) {
             _moveCooldownTimer?.UpdateTimer();
         }
-
 
         if (_curState != _nextState) {
             _curState = _nextState;
@@ -131,19 +129,25 @@ public class BossStoneGolem : BaseBoss, IListener {
         CheckTransitionToNextFhase();
     }
 
+    public override void SetScale(Vector2 scale) {
+        base.SetScale(scale);
+
+        _attackACondition.AttackRange = scale.x;
+    }
+
     public void SetNextState(StateType state) {
         _nextState = state;
     }
 
     private void CheckTransitionToNextFhase() {
         float value = StoneGolemHealthSystem.GetNormalizedHealth();
-        if (_phaseIndex == 1 && value < 0.6f) {
+        if (_phaseIndex == 1 && value < 0.666f) {
             _phaseIndex = 2;
             EventManager.Instance.PostNotification(BossStoneGolemEventType.Gigantic, this, null);
             return;
         }
 
-        if (_phaseIndex == 2 && value < 0.3f) {
+        if (_phaseIndex == 2 && value < 0.333f) {
             _phaseIndex = 3;
             EventManager.Instance.PostNotification(BossStoneGolemEventType.DanDanMukZic, this, null);
             return;

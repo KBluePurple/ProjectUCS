@@ -24,6 +24,13 @@ public class StoneGolemAttackB : MonoBehaviour {
         Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         newStoneGolemProjectile.transform.rotation = targetRotation;
 
+        Vector3 scale = _bossStoneGolem.transform.localScale;
+        scale.y *= -1;
+        if (direction.x > 0) {
+            scale.x = -scale.x;
+        }
+
+        newStoneGolemProjectile.transform.localScale = scale;
 
         newStoneGolemProjectile.Init(5f, _attackDamage, direction);
     }

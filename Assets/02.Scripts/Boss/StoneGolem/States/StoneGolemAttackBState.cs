@@ -15,6 +15,11 @@ public class StoneGolemAttackBState : StoneGolemBaseState {
 
         _target = _bossStoneGolem.Target;
 
+        if (_target == null) {
+            _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Idle);
+            return;
+        }
+
         _bossStoneGolem.LookTarget();
 
         _bossStoneGolem.AttackACondition.Delay();
@@ -37,11 +42,12 @@ public class StoneGolemAttackBState : StoneGolemBaseState {
             _attackCooldownTimer = null;
 
             // 원거리 공격
-            _bossStoneGolem.StoneGolemAttackB.Attack(_target);
+            if (_target != null)
+                _bossStoneGolem.StoneGolemAttackB.Attack(_target);
         }
 
         // 일정 시간 지나면 Idle  
-        if (_idleTransitionTimer.IsCooldownReady()) {
+        if (_idleTransitionTimer != null &&  _idleTransitionTimer.IsCooldownReady()) {
             _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Idle);
         }
     }

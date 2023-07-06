@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StoneGolemAttackACondition : StoneGolemBaseCondition, IAttackCondition {
-    public float AttackRange => _attackRange;
+    public float AttackRange {
+        get => _attackRange;
+        set => _attackRange = 2f * value;
+    }
     private float _attackRange = 2f;
 
     public StoneGolemAttackACondition(BossStoneGolem bossStoneGolem, float cooldownDuration) : base(bossStoneGolem, cooldownDuration) { }
