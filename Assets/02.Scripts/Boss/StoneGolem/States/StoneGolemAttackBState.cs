@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StoneGolemAttackBState : StoneGolemBaseState {
-    private CooldownTimer _idleTransitionTimer;
     private CooldownTimer _attackCooldownTimer;
+    private CooldownTimer _idleTransitionTimer;
 
     private Entity _target;
 
@@ -49,6 +49,7 @@ public class StoneGolemAttackBState : StoneGolemBaseState {
         // 일정 시간 지나면 Idle  
         if (_idleTransitionTimer != null &&  _idleTransitionTimer.IsCooldownReady()) {
             _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Idle);
+            return;
         }
     }
     public override void OnStateExit() { }

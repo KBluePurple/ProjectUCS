@@ -39,6 +39,7 @@ public class StoneGolemAttackAState : StoneGolemBaseState {
             // 공격 
             // 오브젝트 생성 후 콜라이더로
             _bossStoneGolem.StoneGolemAttackA.Attack();
+
             _attackExecutionTimer = new CooldownTimer(0.1f);
             _attackExecutionTimer.StartCooldown();
         }
@@ -51,6 +52,7 @@ public class StoneGolemAttackAState : StoneGolemBaseState {
         // 일정 시간 지나면 Idle  
         if (_idleTransitionTimer.IsCooldownReady()) {
             _bossStoneGolem.SetNextState(BossStoneGolem.StateType.Idle);
+            return;
         }
     }
 

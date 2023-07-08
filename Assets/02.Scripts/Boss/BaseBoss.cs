@@ -53,7 +53,7 @@ public abstract class BaseBoss : Entity {
             _rigidbody.velocity = _curDirection * _moveSpeed;
 
             if (_curDirection.x != 0)
-                Look(_curDirection.x);
+                Look(_curDirection.x > 0 ? 1 : -1);
         }
     }
 
@@ -67,13 +67,14 @@ public abstract class BaseBoss : Entity {
         transform.localScale = new Vector3(_curX * _curScale.x, _curScale.y, 1);
     }
 
-    public void LookTarget() {
+    public void LookTarget(Entity target = null) {
         if (Target != null) {
             Vector2 direction = Target.transform.position - transform.position;
             direction.Normalize();
 
-            if (direction.x != 0)
-                Look(direction.x);
+            if (direction.x != 0) {
+                Look(direction.x > 0 ? 1 : -1);
+            }
         }
     }
 

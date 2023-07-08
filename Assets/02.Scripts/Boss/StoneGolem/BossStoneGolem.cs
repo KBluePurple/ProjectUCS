@@ -26,6 +26,7 @@ public class BossStoneGolem : BaseBoss, IListener {
         DanDanMukZic // 3ÆäÀÌÁî
     }
 
+
     public StoneGolemHealthSystem StoneGolemHealthSystem => _healthSystem as StoneGolemHealthSystem;
 
 
@@ -38,6 +39,7 @@ public class BossStoneGolem : BaseBoss, IListener {
 
     public StoneGolemAttackA StoneGolemAttackA => _stoneGolemAttackA;
     public StoneGolemAttackB StoneGolemAttackB => _stoneGolemAttackB;
+    public StoneGolemAttackC StoneGolemAttackC => _stoneGolemAttackC;
 
 
     protected CooldownTimer _moveCooldownTimer;
@@ -50,8 +52,10 @@ public class BossStoneGolem : BaseBoss, IListener {
     protected StateType _curState;
     protected StateType _nextState;
 
+
     protected StoneGolemAttackA _stoneGolemAttackA;
     protected StoneGolemAttackB _stoneGolemAttackB;
+    protected StoneGolemAttackC _stoneGolemAttackC;
 
 
     private void Start() {
@@ -63,14 +67,17 @@ public class BossStoneGolem : BaseBoss, IListener {
         _moveCooldownTimer = new CooldownTimer(4f);
         _attackACondition = new StoneGolemAttackACondition(this, 3f);
         _attackBCondition = new StoneGolemAttackBCondition(this, 8f);
-        _attackCCondition = new StoneGolemAttackCCondition(this, 13f);
+        _attackCCondition = new StoneGolemAttackCCondition(this, 2f);
         _healCondition = new StoneGolemHealCondition(this, 15f);
 
         _stoneGolemAttackA = GetComponentInChildren<StoneGolemAttackA>();
         _stoneGolemAttackA.Init(this);
 
         _stoneGolemAttackB = GetComponentInChildren<StoneGolemAttackB>();
-        StoneGolemAttackB.Init(this);
+        _stoneGolemAttackB.Init(this);
+
+        _stoneGolemAttackC = GetComponentInChildren<StoneGolemAttackC>();
+        _stoneGolemAttackC.Init(this);
 
         EventManager.Instance.AddListener(BossStoneGolemEventType.Gigantic, this);
         EventManager.Instance.AddListener(BossStoneGolemEventType.DanDanMukZic, this);

@@ -11,7 +11,7 @@ public class StoneGolemAttackCCondition : CooldownTimer, IAttackCondition {
 
     public bool CanAttack() {
         if (IsCooldownReady()) {
-            return false;
+            return true;
         }
 
         return false;

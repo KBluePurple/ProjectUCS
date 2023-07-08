@@ -17,7 +17,7 @@ public class StoneGolemAttackA : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        // Player·Î ¼öÁ¤ ÇÊ¿ä
+        // Playerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
         Test player = other.GetComponent<Test>();
         if (player != null) {
             _playerList.Add(player);
@@ -32,9 +32,9 @@ public class StoneGolemAttackA : MonoBehaviour {
         _collider.enabled = false;
 
         foreach (Entity player in _playerList) {
-            // °ø°Ý 
+            // ï¿½ï¿½ï¿½ï¿½ 
             player.HealthSystem.TakeDamage(_attackDamage);
-            // Todo: ³Ë¹éÈ¿°ú ÇÊ¿ä
+            // Todo: ï¿½Ë¹ï¿½È¿ï¿½ï¿½ ï¿½Ê¿ï¿½
 
         }
 
