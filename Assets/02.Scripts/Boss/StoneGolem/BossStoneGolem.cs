@@ -67,7 +67,7 @@ public class BossStoneGolem : BaseBoss, IListener {
         _moveCooldownTimer = new CooldownTimer(4f);
         _attackACondition = new StoneGolemAttackACondition(this, 3f);
         _attackBCondition = new StoneGolemAttackBCondition(this, 8f);
-        _attackCCondition = new StoneGolemAttackCCondition(this, 2f);
+        _attackCCondition = new StoneGolemAttackCCondition(this, 13f);
         _healCondition = new StoneGolemHealCondition(this, 15f);
 
         _stoneGolemAttackA = GetComponentInChildren<StoneGolemAttackA>();
