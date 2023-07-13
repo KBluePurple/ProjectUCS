@@ -82,6 +82,23 @@ namespace Util.PoolManager
                     return obj;
                 }
             }
+            
+            public void Preload(T prefab, int count)
+            {
+                if (!_stacks.TryGetValue(prefab, out var stack))
+                {
+                    stack = new Stack<T>();
+                    _stacks.Add(prefab, stack);
+                    _prefabs.Add(prefab, prefab);
+                }
+
+                for (var i = 0; i < count; i++)
+                {
+                    var obj = Object.Instantiate(prefab);
+                    _prefabs.Add(obj, prefab);
+                    stack.Push(obj);
+                }
+            }
 
             public void Release(T obj)
             {
