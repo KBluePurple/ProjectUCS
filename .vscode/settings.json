@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "files.encoding": "euckr"
+    "files.encoding": "euckr",
+    "dotnet.defaultSolution": "ProjectUCS.sln"
 }
