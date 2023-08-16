@@ -1,31 +1,17 @@
-public class Fsm
-{
-    private BaseState _curState;
+public class Fsm {
+    private BaseState _curState = null;
 
-    public Fsm(BaseState initState)
-    {
-        _curState = initState;
-        ChangeState(_curState);
-    }
+    public Fsm(BaseState initState) => ChangeState(initState);
 
-    public void ChangeState(BaseState nextState)
-    {
+    public void ChangeState(BaseState nextState) {
         if (_curState == nextState)
             return;
 
         _curState?.OnStateExit();
 
         _curState = nextState;
-        _curState.OnStateExit();
+        _curState.OnStateEnter();
     }
 
-    public void UpdateState()
-    {
-        _curState?.OnStateUpdate();
-    }
-
-    public void LateUpdateState()
-    {
-        _curState?.OnStateLateUpdate();
-    }
+    public void UpdateState() => _curState?.OnStateUpdate();
 }
