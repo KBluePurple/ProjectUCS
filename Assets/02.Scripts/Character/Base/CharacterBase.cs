@@ -37,10 +37,9 @@ public class CharacterBase : MonoBehaviour
     {
         _animator.SetBool("IsMove", direction.x != 0);
 
-        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
-        }
+        _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
+
+        Debug.Log(_animator.GetCurrentAnimatorStateInfo(0));
 
         _spriteRenderer.flipX = direction.x < 0;
     }
