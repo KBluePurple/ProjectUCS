@@ -1,12 +1,11 @@
 using UnityEngine;
 
 // Event Ãß°¡
-public enum EventType
-{
-    None
+public enum EventType {
+    None,
+    BossStoneGolem,
 }
 
-public interface IListener
-{
-    void OnEvent(EventType eventType, Component sender, object param = null);
+public interface IListener {
+    void OnEvent<TEventType>(TEventType eventType, Component sender, object param = null) where TEventType : System.Enum;
 }

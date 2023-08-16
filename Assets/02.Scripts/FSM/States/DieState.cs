@@ -1,5 +1,5 @@
-public class AttackState : BaseState {
-    public AttackState(Entity entity) : base(entity) {
+public class DieState : BaseState {
+    public DieState(Entity entity) : base(entity) {
     }
 
     public override void OnStateEnter() { }
