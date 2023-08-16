@@ -23,5 +23,10 @@ public class Player : MonoBehaviour
 
         var direction = new Vector2(_keyboard.leftArrowKey.isPressed ? -1 : _keyboard.rightArrowKey.isPressed ? 1 : 0, 0);
         _characterBase.Move(direction);
+
+        if (_keyboard.xKey.wasPressedThisFrame)
+        {
+            _characterBase.Attack();
+        }
     }
 }

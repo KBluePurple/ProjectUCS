@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gordon_Jump
+  m_Name: Gordon_ComboSwing1
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 816a22e609ef08e4193f11575733ce63, type: 3}
+      value: {fileID: -1677929368, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - time: 0.0625
+      value: {fileID: 1913984151, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - time: 0.125
+      value: {fileID: 395534725, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - time: 0.1875
+      value: {fileID: 1689664792, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - time: 0.25
+      value: {fileID: -1086943915, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - time: 0.3125
+      value: {fileID: 446721024, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,13 +54,18 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 816a22e609ef08e4193f11575733ce63, type: 3}
+    - {fileID: -1677929368, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - {fileID: 1913984151, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - {fileID: 395534725, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - {fileID: 1689664792, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - {fileID: -1086943915, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
+    - {fileID: 446721024, guid: 41af0fa99a1c86841872bbec7af753fd, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.0625
+    m_StopTime: 0.375
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
