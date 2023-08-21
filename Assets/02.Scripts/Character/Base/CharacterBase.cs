@@ -46,7 +46,7 @@ public class CharacterBase : MonoBehaviour
             _isLeft = direction.x < 0;
         }
 
-        _spriteRenderer.flipX = _isLeft;
+        transform.localScale = new Vector3(_isLeft ? -1 : 1, 1, 1);
     }
 
     public void Jump()
