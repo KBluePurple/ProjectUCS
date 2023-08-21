@@ -26,7 +26,7 @@ public class CharacterBase : MonoBehaviour
     private Animator _animator = null;
     private SpriteRenderer _spriteRenderer = null;
 
-    private bool _isRight = true;
+    private bool _isLeft = false;
 
     private void Awake()
     {
@@ -45,10 +45,10 @@ public class CharacterBase : MonoBehaviour
 
         if(direction.x != 0)
         {
-            _isRight = direction.x < 0;
+            _isLeft = direction.x < 0;
         }
 
-        _spriteRenderer.flipX = _isRight;
+        _spriteRenderer.flipX = _isLeft;
     }
 
     public void Jump()
