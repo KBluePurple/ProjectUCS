@@ -26,6 +26,8 @@ public class CharacterBase : MonoBehaviour
     private Animator _animator = null;
     private SpriteRenderer _spriteRenderer = null;
 
+    private bool _isRight = true;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -41,7 +43,12 @@ public class CharacterBase : MonoBehaviour
 
         Debug.Log(_animator.GetCurrentAnimatorStateInfo(0));
 
-        _spriteRenderer.flipX = direction.x < 0;
+        if(direction.x != 0)
+        {
+            _isRight = direction.x < 0;
+        }
+
+        _spriteRenderer.flipX = _isRight;
     }
 
     public void Jump()
