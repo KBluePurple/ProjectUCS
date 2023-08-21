@@ -41,8 +41,6 @@ public class CharacterBase : MonoBehaviour
 
         _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
 
-        Debug.Log(_animator.GetCurrentAnimatorStateInfo(0));
-
         if(direction.x != 0)
         {
             _isLeft = direction.x < 0;
