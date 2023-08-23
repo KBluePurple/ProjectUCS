@@ -6,6 +6,11 @@ public class PunchingBag : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"OnTriggerEnger2D: {collision.gameObject.name}");
+        
+    }
+
+    public void Damage(float damage)
+    {
+        Debug.Log($"Damage: {damage}");
     }
 }

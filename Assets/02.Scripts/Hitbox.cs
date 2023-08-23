@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator _animator;
+
+    private void Awake()
     {
-        
+        _animator = GetComponentInParent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        float damage = 0;
+
+        int[] stateHashes = new int[3];
+        stateHashes[0] = Animator.StringToHash("Base Layer.Attack.Gordon_ComboSwing1");
+        stateHashes[1] = Animator.StringToHash("Base Layer.Attack.Gordon_ComboSwing2");
+        stateHashes[2] = Animator.StringToHash("Base Layer.Attack.Gordon_ComboSwing3");
+
+        var stateInfoHash = _animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+
+        if (stateInfoHash == stateHashes[0])
+        {
+            damage = 10f;
+        }
+        else if (stateInfoHash == stateHashes[1])
+        {
+            damage = 20f;
+        }
+        else if (stateInfoHash == stateHashes[2])
+        {
+            damage = 30f;
+        }
+
+        collision.SendMessage("Damage", damage, SendMessageOptions.DontRequireReceiver);
     }
 }
