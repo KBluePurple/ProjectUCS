@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (_keyboard.spaceKey.wasPressedThisFrame)
+        if (_keyboard.cKey.wasPressedThisFrame)
         {
             _characterBase.Jump();
         }
