@@ -39,7 +39,16 @@ public class CharacterBase : MonoBehaviour
     {
         _animator.SetBool("IsMove", direction.x != 0);
 
-        _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
+        bool isAttacking = (_animator.GetCurrentAnimatorStateInfo(0).IsName("Gordon_ComboSwing1") || _animator.GetCurrentAnimatorStateInfo(0).IsName("Gordon_ComboSwing2") || _animator.GetCurrentAnimatorStateInfo(0).IsName("Gordon_ComboSwing3"));
+
+        if (!isAttacking)
+        {
+            _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
+        }
+        else
+        {
+            _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+        }
 
         if(direction.x != 0)
         {
