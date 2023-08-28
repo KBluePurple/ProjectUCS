@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!60 &1114208259 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5262030810645209541, guid: 8948f15302694dd4aa01bf049139da84, type: 3}
+  m_PrefabInstance: {fileID: 2099357614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1119668000
 GameObject:
   m_ObjectHideFlags: 3
@@ -290,8 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 1400863987}
-  m_ConfineScreenEdges: 0
+  m_BoundingShape2D: {fileID: 1114208259}
+  m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!1 &1367001895
 GameObject:
@@ -379,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367001895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.000029, y: -1, z: -10}
+  m_LocalPosition: {x: 0, y: 0.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -420,11 +425,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!66 &1400863987 stripped
-CompositeCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1939741427194921925, guid: 8948f15302694dd4aa01bf049139da84, type: 3}
-  m_PrefabInstance: {fileID: 2099357614}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1579640788
 PrefabInstance:
   m_ObjectHideFlags: 0
