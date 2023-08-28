@@ -106,11 +106,12 @@ public abstract class BaseBoss : Entity {
 
     public Entity FindRandomPlayer() {
         if (_findTimer.IsCooldownReady()) {
-            //if (_playerList.Count <= 0) {
-            //    // TODO: 남은 플레이어 존재하지 않음
-            //    _target = null;
-            //    return null;
-            //}
+            if (_playerList.Count <= 0)
+            {
+                // TODO: 남은 플레이어 존재하지 않음
+                _target = null;
+                return null;
+            }
 
             int randomIndex = Random.Range(0, _playerList.Count);
             _target = _playerList[randomIndex];
