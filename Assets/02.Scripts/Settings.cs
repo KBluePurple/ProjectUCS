@@ -60,26 +60,6 @@ public static class Settings
 
     public static event Action OnApply;
 
-    public static class Audio
-    {
-        public static void Apply()
-        {
-            OnApply?.Invoke();
-        }
-
-        public static event Action OnApply;
-    }
-
-    public static class Graphic
-    {
-        public static void Apply()
-        {
-            OnApply?.Invoke();
-        }
-
-        public static event Action OnApply;
-    }
-
     public static class KeyBindings
     {
         public static Key MoveUp { get; set; } = Key.UpArrow;
