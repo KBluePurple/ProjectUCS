@@ -25,6 +25,11 @@ public class NetworkRoom : MonoBehaviour
         _ = new RpcManager();
     }
     
+    public void LeaveRoom()
+    {
+        throw new NotImplementedException();
+    }
+    
     private class RpcManager : RpcHandler
     {
         [RpcHandler(typeof(S2C.Room.RoomWelcomePacket))]

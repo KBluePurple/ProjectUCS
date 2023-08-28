@@ -22,6 +22,16 @@ public class NetworkMatching : MonoBehaviour
         _ = new RpcManager();
     }
     
+    public void StartMatch()
+    {
+        NetworkManager.Instance.Send(new C2S.StartMatchPacket());
+    }
+    
+    public void CancelMatch()
+    {
+        NetworkManager.Instance.Send(new C2S.CancelMatchPacket());
+    }
+    
     private class RpcManager : RpcHandler
     {
         [RpcHandler(typeof(S2C.MatchingStartedPacket))]

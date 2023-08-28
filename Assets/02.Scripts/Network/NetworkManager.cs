@@ -18,7 +18,6 @@ public class NetworkManager : MonoBehaviour
 {
     public NetworkPlayer localPlayer;
 
-    private readonly Dictionary<int, NetworkPlayer> _players = new();
     private Connection _connection;
     private Socket _socket;
     public int UserId { get; private set; }
@@ -67,5 +66,10 @@ public class NetworkManager : MonoBehaviour
             Instance.localPlayer.IsLocalPlayer = true;
             MainThread.Invoke(() => Debug.Log($"Welcome: {packet.UserId}"));
         }
+    }
+
+    public void Send<T>(T packet) where T : IPacket
+    {
+        _connection.Send(packet);
     }
 }
