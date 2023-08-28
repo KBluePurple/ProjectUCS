@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     private CharacterBase _characterBase = null;
     private Keyboard _keyboard = null;
+
 
     private void Awake()
     {
@@ -29,4 +30,7 @@ public class Player : MonoBehaviour
             _characterBase.Attack();
         }
     }
+
+    public override void Die() { }
+
 }
