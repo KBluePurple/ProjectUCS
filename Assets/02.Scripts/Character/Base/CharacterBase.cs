@@ -26,6 +26,8 @@ public class CharacterBase : MonoBehaviour
     private Animator _animator = null;
     private SpriteRenderer _spriteRenderer = null;
 
+    private bool _isLeft = false;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -37,11 +39,23 @@ public class CharacterBase : MonoBehaviour
     {
         _animator.SetBool("IsMove", direction.x != 0);
 
-        _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
+        bool isAttacking = (_animator.GetCurrentAnimatorStateInfo(0).IsName("Gordon_ComboSwing1") || _animator.GetCurrentAnimatorStateInfo(0).IsName("Gordon_ComboSwing2") || _animator.GetCurrentAnimatorStateInfo(0).IsName("Gordon_ComboSwing3"));
 
-        Debug.Log(_animator.GetCurrentAnimatorStateInfo(0));
+        if (!isAttacking)
+        {
+            _rigidbody2D.velocity = new Vector2(direction.x * _moveSpeed, _rigidbody2D.velocity.y);
+        }
+        else
+        {
+            _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
+        }
 
-        _spriteRenderer.flipX = direction.x < 0;
+        if(direction.x != 0)
+        {
+            _isLeft = direction.x < 0;
+        }
+
+        transform.localScale = new Vector3(_isLeft ? -1 : 1, 1, 1);
     }
 
     public void Jump()
