@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class CharacterBase : MonoBehaviour
 {
+    public int JumpMaxCount => _jumpMaxCount;
+    public bool IsGround => _animator.GetBool("IsGround");
+
     [SerializeField]
     private float _hp = 0f;
     [SerializeField]
@@ -20,7 +23,8 @@ public class CharacterBase : MonoBehaviour
     private float _jumpPower = 0f;
     [SerializeField]
     private float _crt = 0f;
-
+    [SerializeField]
+    private int _jumpMaxCount = 1;
 
     private Rigidbody2D _rigidbody2D = null;
     private Animator _animator = null;
@@ -50,7 +54,7 @@ public class CharacterBase : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
         }
 
-        if(direction.x != 0)
+        if (direction.x != 0)
         {
             _isLeft = direction.x < 0;
         }
