@@ -54,7 +54,7 @@ public class NetworkManager : MonoBehaviour
     private void InitializeSocket()
     {
         _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        _socket.Connect("localhost", 7777);
+        _socket.Connect("172.31.1.130", 7777);
     }
 
     private class RpcManager : RpcHandler
