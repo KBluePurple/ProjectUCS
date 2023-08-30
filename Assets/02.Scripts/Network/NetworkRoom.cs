@@ -70,5 +70,15 @@ public class NetworkRoom : MonoBehaviour
                 Instance.OnPlayerLeft?.Invoke(packet.UserId);
             });
         }
+
+        [RpcHandler(typeof(S2C.Room.MovePacket))]
+        private void OnMovePacket(Connection connection, S2C.Room.MovePacket packet)
+        {
+            MainThread.Invoke(() =>
+            {
+                var player = PlayerManager.Instance.GetPlayer(packet.UserId);
+                player.Move(packet.Position, packet.Horizontal);
+            });
+        }
     }
 }

@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
     
-    private readonly Dictionary<int, GameObject> _players = new();
+    private readonly Dictionary<int, NetworkPlayer> _players = new();
 
     private void Awake()
     {
@@ -21,13 +21,12 @@ public class PlayerManager : MonoBehaviour
 
     private void OnPlayerJoined(int userId)
     {
-        var playerObject = Instantiate(Resources.Load<GameObject>("Prefabs/Player"));
-        playerObject.name = $"Player {userId}";
-        playerObject.transform.position = new Vector3(0, 0, 0);
-        var player = playerObject.GetComponent<NetworkPlayer>();
-        player.UserId = userId;
-        player.IsLocalPlayer = userId == NetworkManager.Instance.UserId;
-        _players.TryAdd(userId, playerObject);
+        var networkPlayer = Instantiate(Resources.Load<NetworkPlayer>("Prefabs/Player"));
+        networkPlayer.name = $"Player {userId}";
+        networkPlayer.transform.position = new Vector3(0, 0, 0);
+        networkPlayer.UserId = userId;
+        networkPlayer.IsLocalPlayer = userId == NetworkManager.Instance.UserId;
+        _players.TryAdd(userId, networkPlayer);
         Debug.Log($"Player {userId} joined");
     }
     
@@ -36,5 +35,10 @@ public class PlayerManager : MonoBehaviour
         var player = _players[userId];
         Destroy(player);
         _players.Remove(userId);
+    }
+
+    public NetworkPlayer GetPlayer(int userId)
+    {
+        return _players[userId];
     }
 }
