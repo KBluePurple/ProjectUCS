@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealthSystem {
     protected float _health;
     protected float _maxHealth;
 
+    private Action<float> _onTakeDamageAction = null;
+
     public virtual void Init(Entity entity, float maxHealth = 0f) {
         _entity = entity;
         _health = _maxHealth = maxHealth;
@@ -19,6 +22,7 @@ public class HealthSystem : MonoBehaviour, IDamageable, IHealthSystem {
 
     public virtual void TakeDamage(float damageAmount) {
         _health = Mathf.Clamp(_health - damageAmount, 0, _maxHealth);
+        _onTakeDamageAction?.Invoke(damageAmount);
 
         Debug.Log(_health);
 

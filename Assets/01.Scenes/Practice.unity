@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 160309301}
   - component: {fileID: 160309303}
   - component: {fileID: 160309302}
+  - component: {fileID: 160309304}
   m_Layer: 0
   m_Name: Scarecrow
   m_TagString: Untagged
@@ -233,6 +234,18 @@ CustomCollider2D:
   m_CustomShapes:
     m_Shapes: []
     m_Vertices: []
+--- !u!114 &160309304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160309299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f6ec73d4e4c124581e262c97db5fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &430380452
 GameObject:
   m_ObjectHideFlags: 0
