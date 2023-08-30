@@ -9,11 +9,14 @@ public class Player : Entity
     private Keyboard _keyboard = null;
     private int _jumpCount = 0;
 
-
-    private void Awake()
+    public override void Init()
     {
+        base.Init();
+
         _characterBase = GetComponentInChildren<CharacterBase>();
         _keyboard = Keyboard.current;
+
+        _healthSystem.Init(this, 100);
     }
 
     private void Update()

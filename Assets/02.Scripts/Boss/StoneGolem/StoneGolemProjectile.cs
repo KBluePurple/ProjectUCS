@@ -21,8 +21,14 @@ public class StoneGolemProjectile : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Test player = other.GetComponent<Test>();
-        if (player != null) {
+        //Test player = other.GetComponent<Test>();
+        //if (player != null) {
+        //    player.HealthSystem.TakeDamage(_attackDamage);
+        //}
+
+        Player player = other.GetComponentInParent<Player>();
+        if (player != null)
+        {
             player.HealthSystem.TakeDamage(_attackDamage);
         }
     }
