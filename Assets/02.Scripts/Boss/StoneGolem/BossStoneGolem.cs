@@ -1,20 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum BossStoneGolemEventType {
+public enum BossStoneGolemEventType
+{
     Gigantic,
     DanDanMukZic,
     Die
 }
 
-public class BossStoneGolem : BaseBoss, IListener {
-    public enum StateType {
+public class BossStoneGolem : BaseBoss, IListener
+{
+    public enum StateType
+    {
         Idle,
         Move,
         AttackA, // 근접 공격
@@ -22,7 +20,7 @@ public class BossStoneGolem : BaseBoss, IListener {
         AttackC, // 레이저 공격
         Heal, // 방어 태세
         Die,
-        Gigantic,  // 2페이즈
+        Gigantic, // 2페이즈
         DanDanMukZic // 3페이즈
     }
 
@@ -58,7 +56,8 @@ public class BossStoneGolem : BaseBoss, IListener {
     protected StoneGolemAttackC _stoneGolemAttackC;
 
 
-    private void Start() {
+    private void Start()
+    {
         _curState = _nextState = StateType.Idle;
         _phaseIndex = 1;
 
@@ -84,19 +83,23 @@ public class BossStoneGolem : BaseBoss, IListener {
         EventManager.Instance.AddListener(BossStoneGolemEventType.Die, this);
     }
 
-    private void Update() {
+    private void Update()
+    {
         // Test
         if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
             StoneGolemHealthSystem.TakeDamage(1000);
 
-        if (_curState == StateType.Idle) {
+        if (_curState == StateType.Idle)
+        {
             _moveCooldownTimer?.UpdateTimer();
         }
 
-        if (_curState != _nextState) {
+        if (_curState != _nextState)
+        {
             _curState = _nextState;
 
-            switch (_curState) {
+            switch (_curState)
+            {
                 case StateType.Idle:
                     _fsm.ChangeState(new StoneGolemIdleState(this));
                     break;
@@ -130,55 +133,66 @@ public class BossStoneGolem : BaseBoss, IListener {
         _fsm?.UpdateState();
     }
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         // FindClosestPlayer();
         FindRandomPlayer();
         CheckTransitionToNextFhase();
     }
 
-    public override void SetScale(Vector2 scale) {
+    public override void SetScale(Vector2 scale)
+    {
         base.SetScale(scale);
 
         _attackACondition.AttackRange = scale.x;
     }
 
-    public void SetNextState(StateType state) {
+    public void SetNextState(StateType state)
+    {
         _nextState = state;
     }
 
-    private void CheckTransitionToNextFhase() {
+    private void CheckTransitionToNextFhase()
+    {
         float value = StoneGolemHealthSystem.GetNormalizedHealth();
-        if (_phaseIndex == 1 && value < 0.666f) {
+        if (_phaseIndex == 1 && value < 0.666f)
+        {
             _phaseIndex = 2;
             EventManager.Instance.PostNotification(BossStoneGolemEventType.Gigantic, this, null);
             return;
         }
 
-        if (_phaseIndex == 2 && value < 0.333f) {
+        if (_phaseIndex == 2 && value < 0.333f)
+        {
             _phaseIndex = 3;
             EventManager.Instance.PostNotification(BossStoneGolemEventType.DanDanMukZic, this, null);
             return;
         }
     }
 
-    public override void Die() {
+    public override void Die()
+    {
         EventManager.Instance.PostNotification(BossStoneGolemEventType.Die, this, null);
     }
 
-    public void OnEvent<TEventType>(TEventType eventType, Component sender, object param = null) where TEventType : Enum {
-        if (eventType.Equals(BossStoneGolemEventType.Gigantic)) {
+    public void OnEvent<TEventType>(TEventType eventType, Component sender, object param = null) where TEventType : Enum
+    {
+        if (eventType.Equals(BossStoneGolemEventType.Gigantic))
+        {
             // 거대화 
             _nextState = StateType.Gigantic;
             return;
         }
 
-        if (eventType.Equals(BossStoneGolemEventType.DanDanMukZic)) {
+        if (eventType.Equals(BossStoneGolemEventType.DanDanMukZic))
+        {
             // 단단묵직
             _nextState = StateType.DanDanMukZic;
             return;
         }
 
-        if (eventType.Equals(BossStoneGolemEventType.Die)) {
+        if (eventType.Equals(BossStoneGolemEventType.Die))
+        {
             // 죽음
             _nextState = StateType.Die;
             return;
