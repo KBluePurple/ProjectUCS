@@ -5,16 +5,18 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    [SerializeField]
     private CharacterBase _characterBase = null;
-
     private Keyboard _keyboard = null;
     private int _jumpCount = 0;
 
-    private void Awake()
+    public override void Init()
     {
-        _characterBase = Instantiate(_characterBase.gameObject, transform.position, Quaternion.identity).GetComponent<CharacterBase>();
+        base.Init();
+
+        _characterBase = GetComponentInChildren<CharacterBase>();
         _keyboard = Keyboard.current;
+
+        _healthSystem.Init(this, 100);
     }
 
     private void Update()

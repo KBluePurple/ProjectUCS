@@ -13,6 +13,12 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        BaseBoss boss = collision.GetComponent<BaseBoss>();
+        if (boss == null)
+        {
+            return;
+        }
+
         float damage = 0;
 
         int[] stateHashes = new int[3];
@@ -35,6 +41,8 @@ public class Hitbox : MonoBehaviour
             damage = 30f;
         }
 
-        collision.SendMessage("Damage", damage, SendMessageOptions.DontRequireReceiver);
+        boss.HealthSystem.TakeDamage(damage);
+
+        //collision.SendMessage("Damage", damage, SendMessageOptions.DontRequireReceiver);
     }
 }

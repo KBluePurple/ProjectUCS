@@ -24,7 +24,7 @@ public class StoneGolemHealthSystem : HealthSystem, IListener {
             _health = Mathf.Clamp(_health - damageAmount, 0, _maxHealth);
         }
 
-        Debug.Log(_health);
+        Debug.Log(gameObject.name + " : " + _health);
 
         if (_health <= 0f) {
             _entity.Die();

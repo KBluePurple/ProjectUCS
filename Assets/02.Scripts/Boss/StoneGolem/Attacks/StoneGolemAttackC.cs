@@ -15,7 +15,7 @@ public class StoneGolemAttackC : MonoBehaviour {
         _stoneGolemLaser.Init(_attackDamage);
     }
 
-    public void Attack(Entity target) {
+    public void Attack(GameObject target) {
         Vector2 direction = (target.transform.position - transform.position).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
