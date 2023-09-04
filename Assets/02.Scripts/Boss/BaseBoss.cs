@@ -4,12 +4,14 @@ using UnityEngine;
 
 public abstract class BaseBoss : Entity
 {
-    public Entity Target => _target;
+    //public Entity Target => _target;
+    public GameObject Target => _target;
     public BossStats BossStats => _bossStats;
     public Animator Animator => _animator;
 
-    [SerializeField] protected Entity _target;
-    [SerializeField] protected List<Entity> _playerList = new List<Entity>();
+    //[SerializeField] protected Entity _target;
+    [SerializeField] protected GameObject _target;
+    [SerializeField] protected List<GameObject> _playerList = new List<GameObject>();
 
     protected BossStats _bossStats;
 
@@ -97,12 +99,12 @@ public abstract class BaseBoss : Entity
     }
 
 
-    public Entity FindClosestPlayer()
+    public GameObject FindClosestPlayer()
     {
         float closestDistance = Mathf.Infinity;
-        Entity closestTarget = null;
+        GameObject closestTarget = null;
 
-        foreach (Entity player in _playerList)
+        foreach (GameObject player in _playerList)
         {
             float distance = Vector2.Distance(transform.position, player.transform.position);
             if (distance < closestDistance)
@@ -114,10 +116,10 @@ public abstract class BaseBoss : Entity
 
         _target = closestTarget;
 
-        return closestTarget;
+        return _target;
     }
 
-    public Entity FindRandomPlayer()
+    public GameObject FindRandomPlayer()
     {
         if (_findTimer.IsCooldownReady())
         {
@@ -129,7 +131,7 @@ public abstract class BaseBoss : Entity
             //}
 
             int randomIndex = Random.Range(0, _playerList.Count);
-            _target = _playerList[randomIndex];
+            _target = _playerList[randomIndex].gameObject;
             _findTimer.StartCooldown();
         }
         else
@@ -140,7 +142,7 @@ public abstract class BaseBoss : Entity
         return _target;
     }
 
-    public void RemovePlayerList(Entity player)
+    public void RemovePlayerList(GameObject player)
     {
         _playerList.Remove(player);
     }

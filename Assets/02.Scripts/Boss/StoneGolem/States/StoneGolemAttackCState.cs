@@ -7,7 +7,7 @@ public class StoneGolemAttackCState : StoneGolemBaseState {
     private CooldownTimer _attackExecutionTimer;
     private CooldownTimer _idleTransitionTimer;
 
-    private Entity _target;
+    private GameObject _target;
     public StoneGolemAttackCState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
