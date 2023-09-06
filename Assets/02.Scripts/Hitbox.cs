@@ -13,7 +13,7 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        BaseBoss boss = collision.GetComponent<BaseBoss>();
+        Entity boss = collision.GetComponent<Entity>();
         if (boss == null)
         {
             return;
@@ -42,7 +42,5 @@ public class Hitbox : MonoBehaviour
         }
 
         boss.HealthSystem.TakeDamage(damage);
-
-        //collision.SendMessage("Damage", damage, SendMessageOptions.DontRequireReceiver);
     }
 }
