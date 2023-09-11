@@ -16,9 +16,12 @@ public class Player : Entity
         base.Init();
 
         _characterBase = Instantiate(_characterBase.gameObject, transform.position, Quaternion.identity).GetComponent<CharacterBase>();
+        var hpBar = Instantiate(Resources.Load<HealthBarUI>("Prefabs/HealthHpBar"), _characterBase.transform);
         _keyboard = Keyboard.current;
 
         _healthSystem.Init(this, 100);
+        hpBar.Init(_healthSystem);
+        hpBar.transform.localPosition = new Vector3(0, 1.5f, 0);
     }
 
     private void Update()
