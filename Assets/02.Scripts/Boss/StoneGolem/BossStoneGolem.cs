@@ -56,8 +56,14 @@ public class BossStoneGolem : BaseBoss, IListener
     protected StoneGolemAttackC _stoneGolemAttackC;
 
 
-    private void Start()
+    public override void Init()
     {
+        // ∫∏Ω∫ Ω∫≈»
+        _bossStats = new BossStats(5000, 10000, 500, 200, 3, 0, 0);
+        base.Init();
+
+        UpdateHealthBar();
+
         _curState = _nextState = StateType.Idle;
         _phaseIndex = 1;
 
