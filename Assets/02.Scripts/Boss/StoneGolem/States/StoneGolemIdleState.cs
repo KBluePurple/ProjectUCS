@@ -7,7 +7,7 @@ public class StoneGolemIdleState : StoneGolemBaseState {
     public StoneGolemIdleState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
-        Debug.Log("Idle");
+        //Debug.Log("Idle");
 
         _bossStoneGolem.Animator.SetBool("isMove", false);
     }

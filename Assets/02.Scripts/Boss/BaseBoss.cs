@@ -54,6 +54,20 @@ public abstract class BaseBoss : Entity
         _bossHealthBar = FindObjectOfType<BossHealthBar>();
     }
 
+    private void Start()
+    {
+        // Player로 수정해야 함
+        //Test[] playerComponents = FindObjectsOfType<Test>();
+        //_playerList = new List<Entity>(playerComponents);
+
+        _playerList = new List<GameObject>();
+        CharacterBase[] characterBaseComponents = FindObjectsOfType<CharacterBase>();
+        foreach(CharacterBase characterBaseComponent in characterBaseComponents)
+        {
+            _playerList.Add(characterBaseComponent.gameObject);
+        }
+    }
+
     public void Move(Vector2 direction)
     {
         if (_curDirection != direction)

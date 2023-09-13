@@ -7,7 +7,7 @@ public class StoneGolemAttackA : MonoBehaviour
     private BossStoneGolem _bossStoneGolem;
     private Collider2D _collider;
 
-    private List<Entity> _playerList = new List<Entity>();
+    private List<CharacterBase> _characterList = new List<CharacterBase>();
 
     [SerializeField] private float _attackDamage;
 
@@ -27,17 +27,17 @@ public class StoneGolemAttackA : MonoBehaviour
         //    _playerList.Add(player);
         //}
 
-        Player player = other.GetComponentInParent<Player>();
-        if (player != null)
+        CharacterBase character = other.GetComponentInParent<CharacterBase>();
+        if (character != null)
         {
-            _playerList.Add(player);
+            _characterList.Add(character);
         }
 
     }
 
     public void Attack()
     {
-        _playerList.Clear();
+        _characterList.Clear();
         _collider.enabled = true;
     }
 
@@ -45,14 +45,14 @@ public class StoneGolemAttackA : MonoBehaviour
     {
         _collider.enabled = false;
 
-        foreach (Entity player in _playerList)
+        foreach (CharacterBase character in _characterList)
         {
-            // ���� 
-            player.HealthSystem.TakeDamage(_attackDamage);
+            // ����
+            character.Player.HealthSystem.TakeDamage(_attackDamage);
             // Todo: �˹�ȿ�� �ʿ�
 
         }
 
-        _playerList.Clear();
+        _characterList.Clear();
     }
 }

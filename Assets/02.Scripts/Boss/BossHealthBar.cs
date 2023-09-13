@@ -7,13 +7,12 @@ public class BossHealthBar : MonoBehaviour
 {
     private Slider _bossHealthbarSlider;
 
-    private void Awake()
-    {
-        _bossHealthbarSlider = GetComponentInChildren<Slider>();        
-    }
-
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
+        if (_bossHealthbarSlider == null)
+        {
+            _bossHealthbarSlider = GetComponentInChildren<Slider>();
+        }
         if (_bossHealthbarSlider != null)
         {
             // 체력바를 업데이트합니다.

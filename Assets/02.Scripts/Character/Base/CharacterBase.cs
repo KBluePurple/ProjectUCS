@@ -32,12 +32,17 @@ public class CharacterBase : MonoBehaviour
 
     private bool _isLeft = false;
 
+    public Player Player => _player;
+    private Player _player;
+
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = transform.GetChild(0).GetComponent<Animator>();
         _spriteRenderer = _animator.GetComponent<SpriteRenderer>();
     }
+
+    public void Init(Player player) => _player = player;
 
     public void Move(Vector2 direction)
     {
