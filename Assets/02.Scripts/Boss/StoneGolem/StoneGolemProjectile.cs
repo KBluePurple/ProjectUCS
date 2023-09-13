@@ -26,10 +26,16 @@ public class StoneGolemProjectile : MonoBehaviour {
         //    player.HealthSystem.TakeDamage(_attackDamage);
         //}
 
-        Player player = other.GetComponentInParent<Player>();
-        if (player != null)
+        //Player player = other.GetComponentInParent<Player>();
+        //if (player != null)
+        //{
+        //    player.HealthSystem.TakeDamage(_attackDamage);
+        //}
+
+        CharacterBase character = other.GetComponentInParent<CharacterBase>();
+        if (character != null)
         {
-            player.HealthSystem.TakeDamage(_attackDamage);
+            character.Player.HealthSystem.TakeDamage(_attackDamage);
         }
     }
 }

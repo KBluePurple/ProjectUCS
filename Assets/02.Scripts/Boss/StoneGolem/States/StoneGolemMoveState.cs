@@ -11,7 +11,7 @@ public class StoneGolemMoveState : StoneGolemBaseState {
     }
 
     public override void OnStateEnter() {
-        Debug.Log("Move");
+        //Debug.Log("Move");
 
         _bossStoneGolem.Animator.SetBool("isMove", true);
     }

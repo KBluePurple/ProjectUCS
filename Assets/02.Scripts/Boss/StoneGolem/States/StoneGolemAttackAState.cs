@@ -10,7 +10,7 @@ public class StoneGolemAttackAState : StoneGolemBaseState {
     public StoneGolemAttackAState(Entity entity) : base(entity) { }
 
     public override void OnStateEnter() {
-        Debug.Log("AttackA");
+        //Debug.Log("AttackA");
 
         _bossStoneGolem.LookTarget();
 

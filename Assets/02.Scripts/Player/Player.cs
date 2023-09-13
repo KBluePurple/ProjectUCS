@@ -16,6 +16,8 @@ public class Player : Entity
         base.Init();
 
         _characterBase = Instantiate(_characterBase.gameObject, transform.position, Quaternion.identity).GetComponent<CharacterBase>();
+        _characterBase.Init(this);
+
         var hpBar = Instantiate(Resources.Load<HealthBarUI>("Prefabs/HealthHpBar"), _characterBase.transform);
         _keyboard = Keyboard.current;
 
