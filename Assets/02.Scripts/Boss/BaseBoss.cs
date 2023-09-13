@@ -29,6 +29,9 @@ public abstract class BaseBoss : Entity
     protected Animator _animator;
 
 
+    protected BossHealthBar _bossHealthBar;
+
+
     public override void Init()
     {
         base.Init();
@@ -37,8 +40,6 @@ public abstract class BaseBoss : Entity
         //Test[] playerComponents = FindObjectsOfType<Test>();
         //_playerList = new List<Entity>(playerComponents);
 
-        // ∫∏Ω∫ Ω∫≈»
-        _bossStats = new BossStats(5000, 10000, 500, 200, 3, 0, 0);
 
         _healthSystem.Init(this, _bossStats.Hp);
 
@@ -49,6 +50,8 @@ public abstract class BaseBoss : Entity
         _moveSpeed = _bossStats.MoveSpeed;
 
         _findTimer = new CooldownTimer(2f);
+
+        _bossHealthBar = FindObjectOfType<BossHealthBar>();
     }
 
     public void Move(Vector2 direction)
@@ -145,5 +148,10 @@ public abstract class BaseBoss : Entity
     public void RemovePlayerList(GameObject player)
     {
         _playerList.Remove(player);
+    }
+
+    public void UpdateHealthBar()
+    {
+        _bossHealthBar.UpdateHealthBar(_healthSystem.Health, _bossStats.Hp);
     }
 }

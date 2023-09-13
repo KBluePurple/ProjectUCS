@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneGolemHealthSystem : HealthSystem, IListener {
+public class StoneGolemHealthSystem : BossHealthSystem, IListener {
     private bool _isHeal = false;
     private bool _isDanDanMukZic = false;
 
@@ -25,6 +25,7 @@ public class StoneGolemHealthSystem : HealthSystem, IListener {
         }
 
         Debug.Log(gameObject.name + " : " + _health);
+        Boss.UpdateHealthBar();
 
         if (_health <= 0f) {
             _entity.Die();
