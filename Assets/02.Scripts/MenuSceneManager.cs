@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuSceneManager : MonoBehaviourSingletonTemplate<MenuSceneManager>
 {
@@ -73,15 +74,16 @@ public class MenuSceneManager : MonoBehaviourSingletonTemplate<MenuSceneManager>
         ChangeBtn(Color.white);
     }
 
-
     public void GameStartBtn()
     {
         Debug.Log("GameStart");
+        SceneManager.LoadScene("NetworkTest");
     }
 
     public void TutorialBtn()
     {
         Debug.Log("Tutorial");
+        SceneManager.LoadScene("Practice");
     }
 
     public void SelectCharacterBtn()
