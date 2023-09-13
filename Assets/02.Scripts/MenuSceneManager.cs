@@ -77,7 +77,7 @@ public class MenuSceneManager : MonoBehaviourSingletonTemplate<MenuSceneManager>
     public void GameStartBtn()
     {
         Debug.Log("GameStart");
-        SceneManager.LoadScene("NetworkTest");
+        SceneManager.LoadScene("CombatScene");
     }
 
     public void TutorialBtn()
