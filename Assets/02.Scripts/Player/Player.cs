@@ -21,7 +21,7 @@ public class Player : Entity
 
         _healthSystem.Init(this, 100);
         hpBar.Init(_healthSystem);
-        hpBar.transform.localPosition = new Vector3(0, 1.5f, 0);
+        hpBar.transform.localPosition = new Vector3(0, 1.55f, 0);
     }
 
     private void Update()
