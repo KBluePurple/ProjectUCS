@@ -11,6 +11,10 @@ public class Player : Entity
     private Keyboard _keyboard = null;
     private int _jumpCount = 0;
 
+
+    public bool IsCrouching => _isCrouching;
+    private bool _isCrouching = false;
+
     public override void Init()
     {
         base.Init();
@@ -46,6 +50,8 @@ public class Player : Entity
         {
             ResetJumpCount();
         }
+
+        _isCrouching = _keyboard.downArrowKey.isPressed;
     }
 
     private void ResetJumpCount() => _jumpCount = 0;
