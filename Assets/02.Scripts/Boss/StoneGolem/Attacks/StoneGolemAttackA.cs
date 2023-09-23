@@ -6,6 +6,7 @@ public class StoneGolemAttackA : MonoBehaviour
 {
     private BossStoneGolem _bossStoneGolem;
     private Collider2D _collider;
+    private Effect _effect;
 
     private List<CharacterBase> _characterList = new List<CharacterBase>();
 
@@ -16,6 +17,8 @@ public class StoneGolemAttackA : MonoBehaviour
         _bossStoneGolem = bossStoneGolem;
         _collider = GetComponent<Collider2D>();
         _collider.enabled = false;
+
+        _effect = transform.parent.GetComponentInChildren<Effect>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,6 +47,7 @@ public class StoneGolemAttackA : MonoBehaviour
     public void EndAttack()
     {
         _collider.enabled = false;
+        Effect();
 
         foreach (CharacterBase character in _characterList)
         {
@@ -55,4 +59,10 @@ public class StoneGolemAttackA : MonoBehaviour
 
         _characterList.Clear();
     }
+
+    public void Effect()
+    {
+        _effect.Init();
+    }
+
 }

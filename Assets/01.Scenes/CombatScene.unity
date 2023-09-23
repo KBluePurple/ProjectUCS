@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossHealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 2720802228253359784, guid: e59f3676caab43f4a90a04b49a3319e2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6944947551699038298, guid: e59f3676caab43f4a90a04b49a3319e2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
