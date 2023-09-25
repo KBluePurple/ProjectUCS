@@ -179,6 +179,7 @@ public class BossStoneGolem : BaseBoss, IListener
     public override void Die()
     {
         EventManager.Instance.PostNotification(BossStoneGolemEventType.Die, this, null);
+        base.Die();
     }
 
     public void OnEvent<TEventType>(TEventType eventType, Component sender, object param = null) where TEventType : Enum

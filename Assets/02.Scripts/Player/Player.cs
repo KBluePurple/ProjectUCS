@@ -56,6 +56,7 @@ public class Player : Entity
 
     private void ResetJumpCount() => _jumpCount = 0;
 
-    public override void Die() { }
-
+    public override void Die() {
+        Application.Quit();
+    }
 }

@@ -168,4 +168,10 @@ public abstract class BaseBoss : Entity
     {
         _bossHealthBar.UpdateHealthBar(_healthSystem.Health, _bossStats.Hp);
     }
+
+    public override void Die()
+    {
+        // 보스가 죽으면
+        Application.Quit();
+    }
 }
