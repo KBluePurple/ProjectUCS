@@ -23,7 +23,7 @@ public class MainThread : MonoBehaviour
     
     private void Update()
     {
-        while (Actions.Count > 0) Actions.Dequeue().Invoke();
+        while (Actions.Count > 0) Actions.Dequeue()?.Invoke();
     }
     
     [RuntimeInitializeOnLoadMethod]

@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
-    [SerializeField]
-    private CharacterBase _characterBase = null;
+    [SerializeField] public CharacterBase characterBase;
 
     private Keyboard _keyboard = null;
     private int _jumpCount = 0;
@@ -19,10 +18,10 @@ public class Player : Entity
     {
         base.Init();
 
-        _characterBase = Instantiate(_characterBase.gameObject, transform.position, Quaternion.identity).GetComponent<CharacterBase>();
-        _characterBase.Init(this);
+        characterBase = Instantiate(characterBase.gameObject, transform.position, Quaternion.identity).GetComponent<CharacterBase>();
+        characterBase.Init(this);
 
-        var hpBar = Instantiate(Resources.Load<HealthBarUI>("Prefabs/HealthHpBar"), _characterBase.transform);
+        var hpBar = Instantiate(Resources.Load<HealthBarUI>("Prefabs/HealthHpBar"), characterBase.transform);
         _keyboard = Keyboard.current;
 
         _healthSystem.Init(this, 100);
@@ -32,21 +31,22 @@ public class Player : Entity
 
     private void Update()
     {
-        if (_keyboard.cKey.wasPressedThisFrame && _jumpCount < _characterBase.JumpMaxCount)
+        if (_keyboard.cKey.wasPressedThisFrame && _jumpCount < characterBase.JumpMaxCount)
         {
-            _characterBase.Jump();
+            characterBase.Jump();
             _jumpCount++;
         }
 
         var direction = new Vector2(_keyboard.leftArrowKey.isPressed ? -1 : _keyboard.rightArrowKey.isPressed ? 1 : 0, 0);
-        _characterBase.Move(direction);
+        characterBase.Move(direction);
 
         if (_keyboard.xKey.wasPressedThisFrame)
         {
-            _characterBase.Attack();
+            characterBase.Attack();
+            OnPlayerAttack?.Invoke();
         }
 
-        if (_characterBase.IsGround)
+        if (characterBase.IsGround)
         {
             ResetJumpCount();
         }
@@ -59,4 +59,6 @@ public class Player : Entity
     public override void Die() {
         Application.Quit();
     }
+
+    public event System.Action OnPlayerAttack;
 }

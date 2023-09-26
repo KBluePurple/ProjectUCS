@@ -17,6 +17,7 @@ public enum NetworkState
 
 public class NetworkManager : MonoBehaviour
 {
+    [NonSerialized]
     public NetworkPlayer localPlayer;
 
     private Connection _connection;
@@ -54,7 +55,7 @@ public class NetworkManager : MonoBehaviour
     private void InitializeSocket()
     {
         _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        _socket.Connect("172.31.1.130", 7777);
+        _socket.Connect("127.0.0.1", 7777);
     }
 
     private class RpcManager : RpcHandler

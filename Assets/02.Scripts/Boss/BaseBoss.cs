@@ -11,7 +11,7 @@ public abstract class BaseBoss : Entity
 
     //[SerializeField] protected Entity _target;
     [SerializeField] protected GameObject _target;
-    [SerializeField] protected List<GameObject> _playerList = new List<GameObject>();
+    [SerializeField] protected List<GameObject> _playerList = new();
 
     protected BossStats _bossStats;
 
@@ -140,12 +140,12 @@ public abstract class BaseBoss : Entity
     {
         if (_findTimer.IsCooldownReady())
         {
-            //if (_playerList.Count <= 0)
-            //{
-            //    // TODO: 남은 플레이어 존재하지 않음
-            //    _target = null;
-            //    return null;
-            //}
+            if (_playerList.Count <= 0)
+            {
+                // TODO: 남은 플레이어 존재하지 않음
+                _target = null;
+                return null;
+            }
 
             int randomIndex = Random.Range(0, _playerList.Count);
             _target = _playerList[randomIndex].gameObject;

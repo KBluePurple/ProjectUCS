@@ -80,5 +80,15 @@ public class NetworkRoom : MonoBehaviour
                 player.Move(packet.Position, packet.Horizontal);
             });
         }
+
+        [RpcHandler(typeof(S2C.Room.AttackPacket))]
+        private void OnAttackPacket(Connection connection, S2C.Room.AttackPacket packet)
+        {
+            MainThread.Invoke(() =>
+            {
+                var player = PlayerManager.Instance.GetPlayer(packet.UserId);
+                player.Attack();
+            });
+        }
     }
 }
